@@ -1,0 +1,27 @@
+{
+    "name": "bento/bento-php-sdk",
+    "description": "PHP wrapper for the Bento API",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arve Solland",
+            "email": "arvesolland@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "guzzlehttp/guzzle": "^6.3|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bento\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit test"
+    }
+}
