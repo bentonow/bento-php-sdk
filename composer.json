@@ -1,5 +1,5 @@
 {
-    "name": "bento/bento-php-sdk",
+    "name": "bentonow/bento-php-sdk",
     "description": "PHP wrapper for the Bento API",
     "type": "library",
     "require-dev": {
