@@ -1,6 +1,10 @@
 <?php
 
-namespace bentonow;
+namespace bentonow\Bento;
+
+use bentonow\Bento\BentoClient;
+
+
 
 
 class Bento
@@ -11,7 +15,7 @@ class Bento
 
     public function __construct($site_uuid = null)
     {
-        $this->client = new \bentonow\BentoClient($site_uuid);
+        $this->client = new BentoClient($site_uuid);
     }
 
     public function identify($email)
