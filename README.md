@@ -8,6 +8,7 @@ Track events, update data, record LTV and more in PHP. Data is stored in your Be
 
 🐶 Find a bug? Join us on Discord and let us know!
 
+🔥 Thank you, @arvesolland for the initial commit to this library.
 
 ## Installation
 
@@ -74,3 +75,11 @@ $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
 $bento->track('$signUp',['plan'=>'Free Trial']);
 ```
 
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/bentonow/bento-ruby-sdk. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
