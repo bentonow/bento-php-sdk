@@ -76,6 +76,6 @@ $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
 $bento = new \Bento();
 $bento->identify('user@example.org');
 $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
-
+$bento->track('$signUp',['plan'=>'Free Trial']);
 ```
 
