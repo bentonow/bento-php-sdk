@@ -6,7 +6,7 @@ Track events, update data, record LTV and more in PHP. Data is stored in your Be
 
 👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
 
-🐶 Battle-tested on Bento Production!
+🐶 Find a bug? Join us on Discord and let us know!
 
 ## Installation
 
@@ -19,8 +19,6 @@ This library can be installed via [Composer](https://getcomposer.org):
 ```bash
 composer require bentonow/bento-php-sdk dev-master
 ```
-
-
 
 ## Usage
 
