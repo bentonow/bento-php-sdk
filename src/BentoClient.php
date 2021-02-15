@@ -1,6 +1,6 @@
 <?php
 
-namespace Bento;
+namespace bentonow;
 
 
 class BentoClient
