@@ -24,12 +24,12 @@ Before tracking user or event data, create a new client. If you configured your 
 
 ```php
 // Via .env variables
-$bento = new \Bento();
+$bento = new new bentonow\Bento\Bento();
 ```
 
 or directly inject the site uuid
 ```php
-$bento = new \Bento('YOURSITEUUIDHERE');
+$bento = new new bentonow\Bento\Bento('YOURSITEUUIDHERE');
 ```
 
    
@@ -69,7 +69,7 @@ $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
 
 #### Full Example
 ```php
-$bento = new \Bento();
+$bento = new bentonow\Bento\Bento();
 $bento->identify('user@example.org');
 $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
 $bento->track('$signUp',['plan'=>'Free Trial']);
