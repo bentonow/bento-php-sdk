@@ -2,11 +2,6 @@
 
 namespace bentonow\Bento;
 
-use bentonow\Bento\BentoClient;
-
-
-
-
 class Bento
 {
     public $client;
