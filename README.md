@@ -1,4 +1,4 @@
-# Bento SDK for PHP
+# Bento SDK for PHP [![Build Status](https://github.com/bentonow/bento-php-sdk/workflows/Tests/badge.svg)](https://github.com/bentonow/bento-php-sdk)
 
 🍱 Simple, powerful analytics for PHP projects!
 
