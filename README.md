@@ -24,12 +24,12 @@ Before tracking user or event data, create a new client. If you configured your 
 
 ```php
 // Via .env variables
-$bento = new new bentonow\Bento\Bento();
+$bento = new bentonow\Bento\Bento();
 ```
 
 or directly inject the site uuid
 ```php
-$bento = new new bentonow\Bento\Bento('YOURSITEUUIDHERE');
+$bento = new bentonow\Bento\Bento('YOURSITEUUIDHERE');
 ```
 
    
