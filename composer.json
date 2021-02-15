@@ -21,13 +21,7 @@
             "Bento\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Bento\\"
-            ]
-        }
-    },
+   
     "scripts": {
         "test": "phpunit test"
     }
