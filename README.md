@@ -63,7 +63,7 @@ $bento->track('some_event',['some_key'=>'Some Value']);
 
 ```php
 // you can add custom fields to your visitors which you can leverage for personalization.
-$bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
+$bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum']);
 
 ```
 
@@ -71,7 +71,7 @@ $bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
 ```php
 $bento = new bentonow\Bento\Bento();
 $bento->identify('user@example.org');
-$bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum]);
+$bento->updateFields(['first_name'=>'ash','last_name'=>'ketchum']);
 $bento->track('$signUp',['plan'=>'Free Trial']);
 ```
 
