@@ -2,7 +2,7 @@
 
 namespace bentonow\Bento;
 
-class Bento
+class BentoOld
 {
     public $client;
     public $email;
@@ -10,7 +10,7 @@ class Bento
 
     public function __construct($site_uuid = null)
     {
-        $this->client = new BentoClient($site_uuid);
+        $this->client = new BentoClientOld($site_uuid);
     }
 
     public function identify($email)

@@ -7,7 +7,7 @@ namespace bentonow\Bento\Test;
 
 
 
-use bentonow\Bento\Bento;
+use bentonow\Bento\BentoOld;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Handler\MockHandler;
@@ -21,7 +21,7 @@ final class BentoClientTest extends TestCase
     {
         $this->mock = new MockHandler();
 
-        $this->bento = new Bento('123ABC');
+        $this->bento = new BentoOld('123ABC');
     }
 
     public function testIdentifySuccessful()

@@ -3,7 +3,7 @@
 namespace bentonow\Bento;
 
 
-class BentoClient
+class BentoClientOld
 {
     public $client;
     public $site_uuid;

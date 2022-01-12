@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" backupGlobals="true" colors="true">
+<phpunit bootstrap="./vendor/autoload.php" backupGlobals="true" colors="true">
   <testsuites>
-    <testsuite name="Unit Tests">
-      <directory>tests</directory>
+    <testsuite name="Bento SDK Tests">
+      <directory>./tests/SDK</directory>
     </testsuite>
   </testsuites>
-  <filter>
-    <whitelist>
-      <directory suffix=".php">src</directory>
-    </whitelist>
-  </filter>
 </phpunit>
