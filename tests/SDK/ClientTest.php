@@ -18,6 +18,11 @@ final class ClientTest extends TestCase
     });
   }
 
+  public function tearDown(): void
+  {
+    Server::flush();
+  }
+
   public function testClientGetSendsHeadersAndQueryParametersCorrectly()
   {
     $client = new BentoClient([
@@ -74,15 +79,15 @@ final class ClientTest extends TestCase
 
     $this->assertEquals(
       'application/json',
-      $requests[1]->getHeader('Content-Type')[0]
+      $requests[0]->getHeader('Content-Type')[0]
     );
     $this->assertEquals(
       'Basic MTIzUEs6MTIzU0s=',
-      $requests[1]->getHeader('Authorization')[0]
+      $requests[0]->getHeader('Authorization')[0]
     );
     $this->assertEquals(
       '{"param":"value","site_uuid":"test"}',
-      $requests[1]->getBody()->getContents()
+      $requests[0]->getBody()->getContents()
     );
   }
 }

@@ -40,7 +40,7 @@ class BentoClient
    */
   public function __construct($options)
   {
-    if ($options['clientOptions'] && $options['clientOptions']['baseUrl']) {
+    if (!empty($options['clientOptions']) && !empty($options['clientOptions']['baseUrl'])) {
       $this->_baseUrl = $options['clientOptions']['baseUrl'];
     }
 
@@ -68,7 +68,7 @@ class BentoClient
    * */
   public function get($endpoint, $payload = [])
   {
-    $this->_client->request('GET', $this->_baseUrl . $endpoint, [
+    return $this->_client->request('GET', $this->_baseUrl . $endpoint, [
       'query' => array_merge(
         $payload,
         [
@@ -88,7 +88,7 @@ class BentoClient
    * */
   public function post($endpoint, $payload = [])
   {
-    $this->_client->request('POST', $this->_baseUrl . $endpoint, [
+    return $this->_client->request('POST', $this->_baseUrl . $endpoint, [
       'json' => array_merge(
         $payload,
         [

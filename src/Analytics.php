@@ -6,6 +6,11 @@ use bentonow\Bento\Versions\BentoAPIV1;
 
 class Analytics
 {
+  /**
+   * The V1 class to use.
+   *
+   * @var \bentonow\Bento\Versions\BentoAPIV1
+   */
   private $_v1;
 
   public function __construct($options)
