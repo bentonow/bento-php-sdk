@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use bentonow\Bento\BentoAnalytics;
 use bentonow\Bento\SDK\Batch\BentoEvents;
 
-final class ClientTest extends TestCase
+final class BentoBatchTest extends TestCase
 {
   public function setUp(): void
   {

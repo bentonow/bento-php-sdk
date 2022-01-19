@@ -5,6 +5,7 @@ namespace bentonow\Bento\Versions;
 use bentonow\Bento\SDK\BentoClient;
 use bentonow\Bento\SDK\Batch\BentoBatch;
 use bentonow\Bento\SDK\Batch\BentoEvents;
+use bentonow\Bento\SDK\Commands\BentoCommands;
 
 class BentoAPIV1
 {
@@ -23,16 +24,28 @@ class BentoAPIV1
    */
   private $_batch;
 
+  /**
+   * The BentoCommands to use.
+   *
+   * @var \bentonow\Bento\SDK\Commands\BentoCommands
+   */
+  private $_commands;
+
   public function __construct($options)
   {
     $this->_client = new BentoClient($options);
     $this->_batch = new BentoBatch($this->_client);
+    $this->_commands = new BentoCommands($this->_client);
   }
 
   public function __get($name)
   {
     if ($name == 'Batch') {
       return $this->_batch;
+    }
+
+    if ($name == 'Commands') {
+      return $this->_commands;
     }
 
     return null;
