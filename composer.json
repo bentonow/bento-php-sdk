@@ -1,6 +1,6 @@
 {
     "name": "bentonow/bento-php-sdk",
-    "description": "PHP wrapper for the Bento API",
+    "description": "🍱 Bento PHP SDK and tracking library",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^7.0"
