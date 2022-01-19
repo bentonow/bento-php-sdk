@@ -10,6 +10,7 @@ use bentonow\Bento\SDK\Experimental\BentoExperimental;
 use bentonow\Bento\SDK\Fields\BentoFields;
 use bentonow\Bento\SDK\Forms\BentoForms;
 use bentonow\Bento\SDK\Subscribers\BentoSubscribers;
+use bentonow\Bento\SDK\Tags\BentoTags;
 
 class BentoAPIV1
 {
@@ -63,6 +64,13 @@ class BentoAPIV1
    */
   private $_subscribers;
 
+  /**
+   * The BentoTags to use.
+   *
+   * @var \bentonow\Bento\SDK\Tags\BentoTags
+   */
+  private $_tags;
+
   public function __construct($options)
   {
     $this->_client = new BentoClient($options);
@@ -72,6 +80,7 @@ class BentoAPIV1
     $this->_fields = new BentoFields($this->_client);
     $this->_forms = new BentoForms($this->_client);
     $this->_subscribers = new BentoSubscribers($this->_client);
+    $this->_tags = new BentoTags($this->_client);
   }
 
   public function __get($name)
@@ -98,6 +107,10 @@ class BentoAPIV1
 
     if ($name == 'Subscribers') {
       return $this->_subscribers;
+    }
+
+    if ($name == 'Tags') {
+      return $this->_tags;
     }
 
     return null;

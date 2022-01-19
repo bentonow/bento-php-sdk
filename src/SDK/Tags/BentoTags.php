@@ -1,17 +1,17 @@
 <?php
 
-namespace bentonow\Bento\SDK\Subscribers;
+namespace bentonow\Bento\SDK\Tags;
 
 use bentonow\Bento\SDK\BentoClient;
 
-class BentoSubscribers
+class BentoTags
 {
   /**
-   * The subscribers endpoint.
+   * The tags endpoint.
    *
    * @var string
    */
-  private $_url = '/fetch/subscribers';
+  private $_url = '/fetch/tags';
 
 
   /**
@@ -22,7 +22,7 @@ class BentoSubscribers
   private $_client;
 
   /**
-   * Create a new Bento Subscribers processor.
+   * Create a new Bento Tags processor.
    *
    * @param \bentonow\Bento\SDK\BentoClient $client
    * @return void
@@ -33,29 +33,28 @@ class BentoSubscribers
   }
 
   /**
-   * Returns the subscriber with the specified email or UUID.
+   * Returns all of the fields for the site.
    *
-   * @param mixed $parameters
    * @returns mixed
    */
-  public function getSubscribers($parameters = [])
+  public function getTags()
   {
-    $response = $this->_client->get($this->_url, $parameters);
+    $response = $this->_client->get($this->_url);
 
     $result = json_decode($response->getBody(), true);
     return isset($result['data']) ? $result['data'] : null;
   }
 
   /**
-   * Creates a subscriber inside of Bento.
+   * Creates a tag inside of Bento.
    *
    * @param mixed $parameters
    * @returns mixed
    */
-  public function createSubscriber($parameters)
+  public function createTag($parameters)
   {
     $response = $this->_client->post($this->_url, [
-      'subscriber' => $parameters
+      'tag' => $parameters
     ]);
 
     $result = json_decode($response->getBody(), true);
