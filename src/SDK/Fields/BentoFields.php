@@ -3,7 +3,6 @@
 namespace bentonow\Bento\SDK\Fields;
 
 use bentonow\Bento\SDK\BentoClient;
-use bentonow\Bento\SDK\Fields\BentoCommandTypes;
 
 class BentoFields
 {

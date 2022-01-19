@@ -8,6 +8,7 @@ use bentonow\Bento\SDK\Batch\BentoEvents;
 use bentonow\Bento\SDK\Commands\BentoCommands;
 use bentonow\Bento\SDK\Experimental\BentoExperimental;
 use bentonow\Bento\SDK\Fields\BentoFields;
+use bentonow\Bento\SDK\Forms\BentoForms;
 
 class BentoAPIV1
 {
@@ -47,6 +48,13 @@ class BentoAPIV1
    */
   private $_fields;
 
+  /**
+   * The BentoForms to use.
+   *
+   * @var \bentonow\Bento\SDK\Forms\BentoForms
+   */
+  private $_forms;
+
   public function __construct($options)
   {
     $this->_client = new BentoClient($options);
@@ -54,6 +62,7 @@ class BentoAPIV1
     $this->_commands = new BentoCommands($this->_client);
     $this->_experimental = new BentoExperimental($this->_client);
     $this->_fields = new BentoFields($this->_client);
+    $this->_forms = new BentoForms($this->_client);
   }
 
   public function __get($name)
@@ -72,6 +81,10 @@ class BentoAPIV1
 
     if ($name == 'Fields') {
       return $this->_fields;
+    }
+
+    if ($name == 'Forms') {
+      return $this->_forms;
     }
 
     return null;
