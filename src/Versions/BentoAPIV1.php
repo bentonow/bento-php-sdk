@@ -6,6 +6,7 @@ use bentonow\Bento\SDK\BentoClient;
 use bentonow\Bento\SDK\Batch\BentoBatch;
 use bentonow\Bento\SDK\Batch\BentoEvents;
 use bentonow\Bento\SDK\Commands\BentoCommands;
+use bentonow\Bento\SDK\Experimental\BentoExperimental;
 
 class BentoAPIV1
 {
@@ -31,11 +32,19 @@ class BentoAPIV1
    */
   private $_commands;
 
+  /**
+   * The BentoExperimental to use.
+   *
+   * @var \bentonow\Bento\SDK\Experimental\BentoExperimental
+   */
+  private $_experimental;
+
   public function __construct($options)
   {
     $this->_client = new BentoClient($options);
     $this->_batch = new BentoBatch($this->_client);
     $this->_commands = new BentoCommands($this->_client);
+    $this->_experimental = new BentoExperimental($this->_client);
   }
 
   public function __get($name)
@@ -46,6 +55,10 @@ class BentoAPIV1
 
     if ($name == 'Commands') {
       return $this->_commands;
+    }
+
+    if ($name == 'Experimental') {
+      return $this->_experimental;
     }
 
     return null;

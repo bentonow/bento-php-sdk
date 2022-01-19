@@ -23,7 +23,7 @@ class BentoCommands
   private $_client;
 
   /**
-   * Create a new Bento Batch processor.
+   * Create a new Bento Commands processor.
    *
    * @param \bentonow\Bento\SDK\BentoClient $client
    * @return void
