@@ -10,6 +10,10 @@
         {
             "name": "Arve Solland",
             "email": "arvesolland@gmail.com"
+        },
+        {
+            "name": "Jacob Foster",
+            "email": "me@jacob-foster.com"
         }
     ],
     "require": {
