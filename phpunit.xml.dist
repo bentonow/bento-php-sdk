@@ -4,5 +4,8 @@
     <testsuite name="Bento SDK Tests">
       <directory>./tests/SDK</directory>
     </testsuite>
+    <testsuite name="Bento Core Tests">
+      <directory>./tests</directory>
+    </testsuite>
   </testsuites>
 </phpunit>

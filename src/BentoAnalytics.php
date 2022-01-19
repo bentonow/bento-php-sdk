@@ -4,7 +4,7 @@ namespace bentonow\Bento;
 
 use bentonow\Bento\Versions\BentoAPIV1;
 
-class Analytics
+class BentoAnalytics
 {
   /**
    * The V1 class to use.

@@ -4,6 +4,7 @@ namespace bentonow\Bento\Versions;
 
 use bentonow\Bento\SDK\BentoClient;
 use bentonow\Bento\SDK\Batch\BentoBatch;
+use bentonow\Bento\SDK\Batch\BentoEvents;
 
 class BentoAPIV1
 {
@@ -35,5 +36,195 @@ class BentoAPIV1
     }
 
     return null;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - If you do not wish to trigger automations, please use the
+   * `Commands.addTag` method.
+   *
+   * Tags a subscriber with the specified email and tag. If either the tag or the user
+   * do not exist, they will be created in the system. If the user already has the tag,
+   * another tag event will be sent, triggering any automations that take place upon a
+   * tag being added to a subscriber. Please be aware of the potential consequences.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function tagSubscriber($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [
+        'date' => isset($parameters['date']) ? $parameters['date'] : null,
+        'details' => [
+          'tag' => $parameters['tagName'],
+        ],
+        'email' => $parameters['email'],
+        'type' => BentoEvents::TAG,
+      ]
+    ]);
+
+    return $result->results == 1;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - If you do not wish to trigger automations, please use the
+   * `Commands.subscribe` method.
+   *
+   * Creates a subscriber in the system. If the subscriber already exists, another subscribe event
+   * will be sent, triggering any automations that take place upon subscription. Please be aware
+   * of the potential consequences.
+   *
+   * You may optionally pass any fields that you wish to be set on the subscriber during creation
+   * as well as a `Date` which will backdate the event. If no date is supplied, then the event will
+   * default to the current time.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function addSubscriber($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [
+        'date' => isset($parameters['date']) ? $parameters['date'] : null,
+        'email' => $parameters['email'],
+        'type' => BentoEvents::SUBSCRIBE,
+        'fields' => $parameters['fields'] ?? [],
+      ]
+    ]);
+
+    return $result->results == 1;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - If you do not wish to trigger automations, please use the
+   * `Commands.unsubscribe` method.
+   *
+   * Unsubscribes an email in the system. If the email is already unsubscribed, another unsubscribe event
+   * will be sent, triggering any automations that take place upon an unsubscribe happening. Please be aware
+   * of the potential consequences.
+   *
+   * You may optionally pass a `Date` which will backdate the event. If no date is supplied, then the event
+   * will default to the current time.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function removeSubscriber($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [
+        'date' => isset($parameters['date']) ? $parameters['date'] : null,
+        'email' => $parameters['email'],
+        'type' => BentoEvents::UNSUBSCRIBE,
+      ]
+    ]);
+
+    return $result->results == 1;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - If you do not wish to trigger automations, please use the
+   * `Commands.addField` method.
+   *
+   * Sets the passed-in custom fields on the subscriber, creating the subscriber if it does not exist.
+   * If the fields are already set on the subscriber, the event will be sent, triggering any automations
+   * that take place upon fields being updated. Please be aware of the potential consequences.
+   *
+   * You may optionally pass a `Date` which will backdate the event. If no date is supplied, then the event
+   * will default to the current time.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function updateFields($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [
+        'date' => isset($parameters['date']) ? $parameters['date'] : null,
+        'email' => $parameters['email'],
+        'type' => BentoEvents::UPDATE_FIELDS,
+        'fields' => $parameters['fields'],
+      ]
+    ]);
+
+    return $result->results == 1;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - There is no way to achieve this same behavior without triggering
+   * automations.
+   *
+   * Tracks a purchase in Bento, used to calculate LTV for your subscribers. The values that are received
+   * should be numbers, in cents. For example, `$1.00` should be `100`.
+   *
+   * You may optionally pass a `Date` which will backdate the event. If no date is supplied, then the event
+   * will default to the current time.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function trackPurchase($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [
+        'date' => isset($parameters['date']) ? $parameters['date'] : null,
+        'email' => $parameters['email'],
+        'type' => BentoEvents::PURCHASE,
+        'details' => $parameters['purchaseDetails'],
+      ]
+    ]);
+
+    return $result->results == 1;
+  }
+
+  /**
+   * **This TRIGGERS automations!** - There is no way to achieve this same behavior without triggering
+   * automations.
+   *
+   * Tracks a custom event in Bento.
+   *
+   * You may optionally pass a `Date` which will backdate the event. If no date is supplied, then the event
+   * will default to the current time.
+   *
+   * Because this method uses the batch API, the tag may take between 1 and 3 minutes
+   * to appear in the system.
+   *
+   * Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
+   *
+   * @param mixed parameters
+   * @returns boolean
+   */
+  public function track($parameters)
+  {
+    $result = $this->_batch->importEvents([
+      'events' => [$parameters]
+    ]);
+
+    return $result->results == 1;
   }
 }

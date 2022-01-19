@@ -2,10 +2,10 @@
 
 namespace bentonow\Bento\Tests\SDK\Batch;
 
-use bentonow\Bento\Analytics;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Server\Server;
 use PHPUnit\Framework\TestCase;
+use bentonow\Bento\BentoAnalytics;
 use bentonow\Bento\SDK\Batch\BentoEvents;
 
 final class ClientTest extends TestCase
@@ -26,7 +26,7 @@ final class ClientTest extends TestCase
 
   public function testCanImportBetween1And1000Subscribers()
   {
-    $bento = new Analytics([
+    $bento = new BentoAnalytics([
       'authentication' => [
         'secretKey' => '123SK',
         'publishableKey' => '123PK',
@@ -66,7 +66,7 @@ final class ClientTest extends TestCase
 
   public function testCanImportBetween1And1000Events()
   {
-    $bento = new Analytics([
+    $bento = new BentoAnalytics([
       'authentication' => [
         'secretKey' => '123SK',
         'publishableKey' => '123PK',
