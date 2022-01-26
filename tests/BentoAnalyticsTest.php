@@ -6,7 +6,6 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Server\Server;
 use PHPUnit\Framework\TestCase;
 use bentonow\Bento\BentoAnalytics;
-use bentonow\Bento\SDK\Batch\BentoEvents;
 
 final class BentoAnalyticsTest extends TestCase
 {
