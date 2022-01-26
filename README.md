@@ -16,11 +16,12 @@ Track events, update data, record LTV and more in PHP. Data is stored in your Be
         -   [updateFields(parameters: UpdateFieldsParameters): boolean](#updatefieldsparameters-updatefieldsparameters-boolean)
         -   [trackPurchase(parameters: TrackPurchaseParameters): boolean](#trackpurchaseparameters-trackpurchaseparameters-boolean)
     -   [Batch](#Batch)
-        -   [.importSubscribers(parameters: BatchImportSubscribersParameter): number](#batchimportsubscribersparameters-batchimportsubscribersparameters-number)
-        -   [.importEvents(parameters: BatchImportEventsParameter): number](#batchimporteventsparameters-batchimporteventsparameters-e-number)
+        -   [.importSubscribers(parameters: BatchImportSubscribersParameter): number](#batchimportsubscribersparameters-batchimportsubscribersparameter-number)
+        -   [.importEvents(parameters: BatchImportEventsParameter): number](#batchimporteventsparameters-batchimporteventsparameter-number)
     -   [Commands](#Commands)
         -   [.addTag(parameters: AddTagParameters): Subscriber | null](#commandsaddtagparameters-addtagparameters-subscriber--null)
         -   [.removeTag(parameters: RemoveTagParameters): Subscriber | null](#commandsremovetagparameters-removetagparameters-subscriber--null)
+        -   [.addField(parameters: AddFieldParameters): Subscriber | null](#commandsaddfieldparameters-addfieldparameters-subscriber--null)
         -   [.removeField(parameters: RemoveFieldParameters): Subscriber | null](#commandsremovefieldparameters-removefieldparameters-subscriber--null)
         -   [.subscribe(parameters: SubscribeParameters): Subscriber | null](#commandssubscribeparameters-subscribeparameters-subscriber--null)
         -   [.unsubscribe(parameters: UnsubscribeParameters): Subscriber | null](#commandsunsubscribeparameters-unsubscribeparameters-subscriber--null)
@@ -144,7 +145,7 @@ Because this method uses the batch API, the tag may take between 1 and 3 minutes
 
 Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
 
-Reference Types: [AddSubscriberParameters](#addsubscriberparameterss)
+Reference Types: [AddSubscriberParameters](#addsubscriberparameters)
 
 ```php
 $bento->V1->addSubscriber([
@@ -193,7 +194,7 @@ Because this method uses the batch API, the tag may take between 1 and 3 minutes
 
 Returns `true` if the event was successfully dispatched. Returns `false` otherwise.
 
-Reference Types: [UpdateFieldsParameters](#updatefieldsparameterss)
+Reference Types: [UpdateFieldsParameters](#updatefieldsparameters)
 
 ```php
 $bento->V1->updateFields([
@@ -269,7 +270,7 @@ This method is processed by the Bento import queues and it may take between 1 an
 
 Returns the number of subscribers that were imported.
 
-Reference Types: [BatchImportSubscribersParameter](#batchimportsubscribersparameters)
+Reference Types: [BatchImportSubscribersParameter](#batchimportsubscribersparameter)
 
 ```php
 $bento->V1->Batch->importSubscribers([
