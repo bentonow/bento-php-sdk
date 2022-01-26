@@ -1,6 +1,6 @@
 {
     "name": "bentonow/bento-php-sdk",
-    "description": "PHP wrapper for the Bento API",
+    "description": "🍱 Bento PHP SDK and tracking library",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^7.0"
@@ -10,18 +10,25 @@
         {
             "name": "Arve Solland",
             "email": "arvesolland@gmail.com"
+        },
+        {
+            "name": "Jacob Foster",
+            "email": "me@jacob-foster.com"
         }
     ],
     "require": {
         "php": ">=7.1",
-        "guzzlehttp/guzzle": "^6.3|^7.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/test-server": "^0.1.0"
     },
     "autoload": {
+        "classmap": [
+            "src/"
+        ],
         "psr-4": {
-            "bentonow\\Bento\\": "src"
+            "bentonow\\Bento\\": "src/"
         }
     },
-   
     "scripts": {
         "test": "phpunit"
     }
