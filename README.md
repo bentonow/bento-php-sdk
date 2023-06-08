@@ -1,12 +1,13 @@
 # Bento SDK for PHP
 
-🍱 Simple, powerful analytics for PHP projects!
+🍱 Simple, powerful analytics for PHP (and Laravel) projects!
 
 Track events, update data, record LTV and more in PHP. Data is stored in your Bento account so you can easily research and investigate what's going on.
 
 👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
 
 -   [Installation](#Installation)
+-   [Installation for Laravel](#Installation-Laravel)
 -   [Get Started](#Get-Started)
 -   [Modules](#Modules)
     -   [Analytics (Base Module)](#analytics-base-module)
@@ -54,6 +55,65 @@ Run the following command in your project folder. (Note, this project requires [
 composer require bentonow/bento-php-sdk
 ```
 
+## Installation Laravel
+
+If you want to make the Bento instance accessible throughout your application, you might want to consider using a Service Provider. Service Providers in Laravel are central to bootstrapping all of the framework's various components, like routing, events, etc. Here's a basic guide:
+
+### Step 1: Create a new service provider:
+
+You can use the artisan command to generate a new service provider:
+```
+php artisan make:provider BentoServiceProvider
+```
+This will create a new file in `app/Providers`.
+
+### Step 2: Register the service in the new provider
+
+Open the newly created provider file. In the register method, bind the Bento instance to the service container. The register method is the perfect place to bind items to the service container:
+```
+// Add this at the top of the file
+use bentonow\Bento\BentoAnalytics;
+
+public function register()
+{
+    $this->app->singleton(BentoAnalytics::class, function ($app) {
+        return new BentoAnalytics([
+            'authentication' => [
+                'secretKey' => env('BENTO_SECRET_KEY'),
+                'publishableKey' => env('BENTO_PUBLISHABLE_KEY')
+            ],
+            'siteUuid' => env('BENTO_SITE_UUID')
+        ]);
+    });
+}
+```
+Note that the `env()` function is used to get the values from your environment variables. Replace `'BENTO_SECRET_KEY'`, `'BENTO_PUBLISHABLE_KEY'`, and `'BENTO_SITE_UUID'` with your actual environment variable names.
+
+### Step 3: Register the Service Provider
+
+In `config/app.php`, add your new service provider to the providers array:
+```
+'providers' => [
+    // Other Service Providers
+
+    App\Providers\BentoServiceProvider::class,
+],
+```
+
+Now, you can resolve (or "get") the Bento instance out of the service container anywhere in your application using dependency injection or the app() helper function:
+```
+$bento = app(BentoAnalytics::class);
+```
+
+Or you can use dependency injection in your controller method:
+```
+public function someMethod(BentoAnalytics $bento) 
+{
+    // Use $bento here...
+}
+```
+This way, you're adhering to the Dependency Inversion Principle, one of the SOLID principles of object-oriented design, which can lead to more maintainable and flexible code.
+
 ## Get Started
 
 To get started with tracking things in Bento, simply initialize the client and run wild!
@@ -70,21 +130,17 @@ $bento = new BentoAnalytics([
   'siteUuid' => 'siteUuid'
 ])
 
-// Create a new subscriber.
-$bento->V1->addSubscriber([
-  'email' => 'test@bentonow.com'
+# Send in a custom event that can trigger an automation — this will also create the user in your account, no need for a second call!
+# We strongly recommend using track() for most real-time things.
+$bento->V1->track([
+  'email' => 'test@bentonow.com',
+  'type' => '$signed_up',
+  'details' => [
+    'fromCustomEvent' => true
+  ]
 ]);
 
-// Update the fields on a subscriber.
-$bento->V1->updateFields([
-  'email' => 'test@bentonow.com',
-  'fields' => [
-    'firstName' => 'Test',
-    'lastName' => 'User'
-  ]
-])
-
-// Track a purchase.
+// Track a custom unique event (purchase, sale, etc).
 $bento->V1->trackPurchase([
   'email' => 'test@bentonow.com',
   'purchaseDetails' => [
