@@ -64,7 +64,7 @@ If you want to make the Bento instance accessible throughout your application, y
 ### Step 1: Create a new service provider:
 
 You can use the artisan command to generate a new service provider:
-```
+```php
 php artisan make:provider BentoServiceProvider
 ```
 This will create a new file in `app/Providers`.
@@ -72,7 +72,7 @@ This will create a new file in `app/Providers`.
 ### Step 2: Register the service in the new provider
 
 Open the newly created provider file. In the register method, bind the Bento instance to the service container. The register method is the perfect place to bind items to the service container:
-```
+```php
 // Add this at the top of the file
 use bentonow\Bento\BentoAnalytics;
 
@@ -94,7 +94,7 @@ Note that the `env()` function is used to get the values from your environment v
 ### Step 3: Register the Service Provider
 
 In `config/app.php`, add your new service provider to the providers array:
-```
+```php
 'providers' => [
     // Other Service Providers
 
@@ -103,12 +103,12 @@ In `config/app.php`, add your new service provider to the providers array:
 ```
 
 Now, you can resolve (or "get") the Bento instance out of the service container anywhere in your application using dependency injection or the app() helper function:
-```
+```php
 $bento = app(BentoAnalytics::class);
 ```
 
 Or you can use dependency injection in your controller method:
-```
+```php
 public function someMethod(BentoAnalytics $bento) 
 {
     // Use $bento here...
