@@ -6,6 +6,8 @@ Track events, update data, record LTV and more in PHP. Data is stored in your Be
 
 👋 To get personalized support, please tweet @bento or email jesse@bentonow.com!
 
+❤️ Thank you @cavel (in Discord) from [GuitarCreative](https://guitarcreative) for your contribution to the Laravel documentation.
+
 -   [Installation](#Installation)
 -   [Installation for Laravel](#Installation-Laravel)
 -   [Get Started](#Get-Started)
