@@ -33,18 +33,19 @@ class BentoEmails
 
     /**
      * Creates an email request. Requests are instant and queued into a priority queue.
-     * Takes an email array of 1 to 60 emails. Example:
-     * emails: [
-     * {
-     *  "to": "test@bentonow.com",
-     *  "from": "jesse@bentonow.com",
-     *  "subject": "Reset Password",
-     *  "html_body": "<p>Here is a link to reset your password ... {{ link }}</p>",
-     *  "transactional": true,
-     *  "personalizations": {
-     *      "link": "https://example.com/test"
-     *  }
-     * }
+     * Transaction emails appear in email logs or under the profile of the subscriber.
+     * Takes an array of emails as an array. Minimum 1 maximum of 60 emails. Example:
+     * [
+     *  [
+     *     "to": "test@bentonow.com",
+     *     "from": "jesse@bentonow.com",
+     *     "subject": "Reset Password",
+     *     "html_body": "<p>Here is a link to reset your password ... {{ link }}</p>",
+     *     "transactional": true,
+     *     "personalizations": [
+     *         "link": "https://example.com/test"
+     *      ]
+     *  ]
      * ]
      *
      * @param mixed $parameters

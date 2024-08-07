@@ -103,7 +103,7 @@ class BentoAPIV1
     }
 
     if ($name == 'Emails') {
-      return $this->_commands;
+      return $this->_emails;
     }
 
     if ($name == 'Experimental') {
