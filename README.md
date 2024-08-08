@@ -28,6 +28,8 @@ Track events, update data, record LTV and more in PHP. Data is stored in your Be
         -   [.removeField(parameters: RemoveFieldParameters): Subscriber | null](#commandsremovefieldparameters-removefieldparameters-subscriber--null)
         -   [.subscribe(parameters: SubscribeParameters): Subscriber | null](#commandssubscribeparameters-subscribeparameters-subscriber--null)
         -   [.unsubscribe(parameters: UnsubscribeParameters): Subscriber | null](#commandsunsubscribeparameters-unsubscribeparameters-subscriber--null)
+    -   [Events](#Events)
+        -   [.createEvent(parameters: CreateEventParameters): Events[] | null](#eventscreateeventparameters-createeventparameters-events--null)
     -   [Experimental](#Experimental)
         -   [.validateEmail(parameters: ValidateEmailParameters): boolean](#experimentalvalidateemailparameters-validateemailparameters-boolean)
         -   [.guessGender(parameters: GuessGenderParameters): GuessGenderResponse](#experimentalguessgenderparameters-guessgenderparameters-guessgenderresponse)
@@ -473,6 +475,21 @@ $bento->V1->Commands->unsubscribe([
 ]);
 ```
 
+## Events
+
+### `Events.createEvent(parameters: CreateEventParameters): Events[] | null`
+
+Creates an Event inside of Bento.
+
+Reference Types: [Events](#Events)
+
+```php
+$bento->V1->Events->createEvent([
+  'type' => '$completed_onboarding',
+  'email' => 'test@test.com'
+]);
+```
+
 ## Experimental
 
 ### `Experimental.validateEmail(parameters: ValidateEmailParameters): boolean`
@@ -804,6 +821,17 @@ The results is an object where the key is the name of the blacklist that was che
 | Property | Type     | Default | Required |
 | -------- | -------- | ------- | -------- |
 | name     | `string` | _none_  | ✔️       |
+
+---
+
+### `Events`
+
+| Property | Type     | Default | Required |
+|----------|----------| ------- | ------ |
+| type     | `string` | _none_  | ✔️     |
+| email    | `string` | _none_  | ✔️     |
+| fields   | `mixed` \| `null` | _none_  | ❌️      |
+| details  | `mixed` \| `null` | _none_  | ❌️      |
 
 ---
 
