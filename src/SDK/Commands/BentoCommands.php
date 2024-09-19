@@ -192,7 +192,8 @@ class BentoCommands
 
   private function _constructCommandsResult($response)
   {
-    $decodedResponse = json_decode($response->getBody(), true);
-    return isset($decodedResponse['data']) ? $decodedResponse['data'] : null;
+    $responseBody = (string) $response->getBody();
+    $decodedResponse = json_decode($responseBody, true);
+    return isset($decodedResponse) ? $decodedResponse : null;
   }
 }
