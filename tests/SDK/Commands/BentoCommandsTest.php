@@ -49,7 +49,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $this->_resolvedObject]))
+      new Response(200, [], json_encode($this->_resolvedObject))
     ]);
 
     $result = $bento->V1->Commands->addTag([
@@ -81,7 +81,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $this->_resolvedObject]))
+      new Response(200, [], json_encode($this->_resolvedObject))
     ]);
 
     $result = $bento->V1->Commands->removeTag([
@@ -119,7 +119,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $myData]))
+      new Response(200, [], json_encode($myData))
     ]);
 
     $result = $bento->V1->Commands->addField([
@@ -154,7 +154,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $this->_resolvedObject]))
+      new Response(200, [], json_encode($this->_resolvedObject))
     ]);
 
     $result = $bento->V1->Commands->removeField([
@@ -186,7 +186,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $this->_resolvedObject]))
+      new Response(200, [], json_encode($this->_resolvedObject))
     ]);
 
     $result = $bento->V1->Commands->subscribe([
@@ -217,7 +217,7 @@ final class BentoCommandsTest extends TestCase
     ]);
 
     Server::enqueue([
-      new Response(200, [], json_encode(['data' => $this->_resolvedObject]))
+      new Response(200, [], json_encode($this->_resolvedObject))
     ]);
 
     $result = $bento->V1->Commands->unsubscribe([
