@@ -8,7 +8,7 @@ The Bento PHP SDK makes it quick and easy to build an excellent analytics experi
 
 Get started with our [📚 integration guides](https://docs.bentonow.com), or [📘 browse the SDK reference](https://docs.bentonow.com/subscribers).
 
-❤️ Thank you @cavel (in Discord) from [GuitarCreative](https://guitarcreative.com) for your contribution to the Laravel documentation (which lead to our new [official Laravel SDK](https://github.com/bentonow/bento-laravel-sdk#Installation-Laravel).
+❤️ Thank you @cavel (in Discord) from [GuitarCreative](https://guitarcreative.com) for your contribution to the Laravel documentation (which lead to the creation of our new [official Laravel SDK](https://github.com/bentonow/bento-laravel-sdk#Installation-Laravel)).
 
 [![Build Status](https://travis-ci.org/bentonow/bento-php-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-php-sdk)
 
