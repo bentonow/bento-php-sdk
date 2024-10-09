@@ -1,7 +1,5 @@
-
-<p align="center"><img src="/art/bento-php-header.png" alt="Bento PHP SDK"></p>
-
-[![Build Status](https://travis-ci.org/bentonow/bento-php-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-php-sdk)
+# Bento PHP SDK
+<img align="right" src="https://app.bentonow.com/brand/logoanim.gif">
 
 > [!TIP]
 > Need help? Join our [Discord](https://discord.gg/ssXXFRmt5F) or email jesse@bentonow.com for personalized support.
@@ -12,6 +10,7 @@ Get started with our [📚 integration guides](https://docs.bentonow.com), or [�
 
 ❤️ Thank you @cavel (in Discord) from [GuitarCreative](https://guitarcreative.com) for your contribution to the Laravel documentation.
 
+[![Build Status](https://travis-ci.org/bentonow/bento-php-sdk.svg?branch=master)](https://travis-ci.org/bentonow/bento-php-sdk)
 
 Table of contents
 =================
