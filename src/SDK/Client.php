@@ -103,7 +103,7 @@ class BentoClient
    * adds the `Authorization` header.
    *
    * @param mixed $authentication
-   * @return void
+   * @return array
    */
   private function _extractHeaders($authentication)
   {
@@ -121,7 +121,8 @@ class BentoClient
 
     return [
       'Authorization' => 'Basic ' . $authenticationKey,
-      'Content-Type' => 'application/json'
+      'Content-Type' => 'application/json',
+      'User-Agent' => 'bento-php-'.$this->_siteUuid,
     ];
   }
 
