@@ -1,0 +1,19 @@
+name: Merge Checks
+
+on: [push]
+jobs:
+  build:
+    strategy:
+      matrix:
+        php: ['7.4','8.1']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer
+      - name: Install dependencies
+        run: composer install -W --prefer-dist --no-progress --no-suggest
+      - name: PHPUnit
+        run: composer run-script test
