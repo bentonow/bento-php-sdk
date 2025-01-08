@@ -14,6 +14,6 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: composer
       - name: Install dependencies
-        run: composer install -W --prefer-dist --no-progress --no-suggest
+        run: composer update -W --no-progress
       - name: PHPUnit
         run: composer run-script test
