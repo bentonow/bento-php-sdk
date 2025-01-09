@@ -15,5 +15,9 @@ jobs:
           tools: composer
       - name: Install dependencies
         run: composer update -W --no-progress
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
       - name: PHPUnit
         run: composer run-script test
