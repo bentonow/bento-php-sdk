@@ -14,8 +14,20 @@
         {
             "name": "Jacob Foster",
             "email": "me@jacob-foster.com"
+        },
+        {
+            "name": "Jesse Hanley",
+            "email": "jesse@bentonow.com"
+        },
+        {
+            "name": "Zachary Oakes",
+            "email": "zachary.oakes@gmail.com"
         }
     ],
+    "homepage": "https://github.com/bentonow/bento-php-sdk",
+    "support": {
+        "email": "support@bentonow.com"
+    },
     "require": {
         "php": "^7.1 || ^8.0",
         "guzzlehttp/guzzle": "^7.8",
