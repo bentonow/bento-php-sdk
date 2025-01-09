@@ -1,18 +1,42 @@
 module.exports = async ({github, context}) => {
+    const defaultBranch = 'master'; // Changed from 'main' to 'master'
+    
     // Get the latest tag
-    const { data: tags } = await github.rest.repos.listTags({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        per_page: 1
-    });
-    const latestTag = tags[0]?.name || '';
-    // Get commits since last tag
-    const { data: commits } = await github.rest.repos.compareCommits({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        base: latestTag || 'main~1',
-        head: 'main'
-    });
+    let latestTag = null;
+    try {
+        const { data: tags } = await github.rest.repos.listTags({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            per_page: 1
+        });
+        latestTag = tags[0]?.name || null;
+    } catch (error) {
+        console.log('No previous tags found');
+    }
+
+    // Get commits since last tag or beginning of history if no tags
+    let commits;
+    try {
+        const { data } = await github.rest.repos.compareCommits({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            base: latestTag || `${defaultBranch}~10`, // If no tags, get last 10 commits
+            head: defaultBranch
+        });
+        commits = data;
+    } catch (error) {
+        // If the comparison fails (e.g., with a new repo), get the latest commits
+        const { data } = await github.rest.repos.listCommits({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            sha: defaultBranch,
+            per_page: 10
+        });
+        commits = {
+            commits: data
+        };
+    }
+
     // Get PRs
     const { data: pulls } = await github.rest.pulls.list({
         owner: context.repo.owner,
@@ -22,42 +46,36 @@ module.exports = async ({github, context}) => {
         direction: 'desc',
         per_page: 100
     });
+
     // Filter merged PRs since last release
     const mergedPRs = pulls.filter(pr => {
-        return pr.merged_at && (!latestTag || new Date(pr.merged_at) > new Date(tags[0]?.created_at));
+        return pr.merged_at && (!latestTag || new Date(pr.merged_at) > new Date(latestTag.created_at));
     });
-    // Enhanced change type detection
+
+    // Rest of the existing code remains the same...
     const getChangeType = (subject, body = '') => {
         const text = `${subject}\n${body}`.toLowerCase();
-        // PHP-specific breaking changes
         if (text.includes('breaking change') ||
             text.includes('breaking:') ||
             text.includes('bc break') ||
             text.includes('backwards compatibility')) return 'breaking';
-        // PHP-specific features
         if (text.includes('feat:') ||
             text.includes('feature:') ||
             text.includes('enhancement:') ||
             text.includes('new class') ||
             text.includes('new interface')) return 'feature';
-        // PHP-specific fixes
         if (text.includes('fix:') ||
             text.includes('bug:') ||
             text.includes('hotfix:') ||
             text.includes('patch:')) return 'bug';
-        // Dependencies
-        if (text.includes('go') ||
-            text.includes('dependency') ||
+        if (text.includes('dependency') ||
             text.includes('upgrade') ||
             text.includes('bump')) return 'dependency';
-        // Documentation
         if (text.includes('doc:') ||
             text.includes('docs:')) return 'docs';
-        // Tests
         if (text.includes('test:') ||
             text.includes('test') ||
             text.includes('coverage')) return 'test';
-        // Maintenance
         if (text.includes('chore:') ||
             text.includes('refactor:') ||
             text.includes('style:') ||
@@ -65,7 +83,8 @@ module.exports = async ({github, context}) => {
             text.includes('lint')) return 'maintenance';
         return 'other';
     };
-    // Enhanced categories
+
+    // Categories remain the same...
     const categories = {
         '🚀 New Features': {
             commits: commits.commits.filter(commit =>
@@ -124,39 +143,42 @@ module.exports = async ({github, context}) => {
             )
         }
     };
+
     // Generate markdown
     let markdown = `## Release v${process.env.VERSION}\n\n`;
-    // Add go version and dependency information
+    
+    // Add requirements information
     markdown += '### Requirements\n\n';
     markdown += '* The Bento PHP SDK requires PHP 7.4+\n';
     markdown += '* Composer\n';
-    markdown += '* Bento API keys\n';
+    markdown += '* Bento API keys\n\n';
+
     // Add breaking changes first
     const breakingChanges = [
         ...commits.commits.filter(commit => getChangeType(commit.commit.message) === 'breaking'),
         ...mergedPRs.filter(pr => getChangeType(pr.title, pr.body) === 'breaking')
     ];
+    
     if (breakingChanges.length > 0) {
         markdown += '⚠️ **Breaking Changes**\n\n';
         breakingChanges.forEach(change => {
-            if ('number' in change) { // It's a PR
+            if ('number' in change) {
                 markdown += `* ${change.title} (#${change.number})\n`;
-            } else { // It's a commit
+            } else {
                 const firstLine = change.commit.message.split('\n')[0];
                 markdown += `* ${firstLine} (${change.sha.substring(0, 7)})\n`;
             }
         });
         markdown += '\n';
     }
+
     // Add categorized changes
     for (const [category, items] of Object.entries(categories)) {
         if (items.commits.length > 0 || items.prs.length > 0) {
             markdown += `### ${category}\n\n`;
-            // Add PRs first
             items.prs.forEach(pr => {
                 markdown += `* ${pr.title} (#${pr.number}) @${pr.user.login}\n`;
             });
-            // Add commits that aren't associated with PRs
             items.commits
                 .filter(commit => !items.prs.some(pr => pr.merge_commit_sha === commit.sha))
                 .forEach(commit => {
@@ -166,21 +188,25 @@ module.exports = async ({github, context}) => {
             markdown += '\n';
         }
     }
+
     // Add installation instructions
     markdown += '### Installation\n\n';
     markdown += '```bash\n';
     markdown += 'composer require bentonow/bento-php-sdk\n';
     markdown += '```\n\n';
+
     // Add contributors section
     const contributors = new Set([
         ...mergedPRs.map(pr => pr.user.login),
         ...commits.commits.map(commit => commit.author?.login || commit.commit.author.name)
     ]);
+    
     if (contributors.size > 0) {
         markdown += '## Contributors\n\n';
         [...contributors].forEach(contributor => {
             markdown += `* ${contributor.includes('@') ? contributor : '@' + contributor}\n`;
         });
     }
+
     return markdown;
 }
