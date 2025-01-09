@@ -128,7 +128,8 @@ module.exports = async ({github, context}) => {
     let markdown = `## Release v${process.env.VERSION}\n\n`;
     // Add go version and dependency information
     markdown += '### Requirements\n\n';
-    markdown += '* Node.js version 12 or later\n';
+    markdown += '* The Bento PHP SDK requires PHP 7.4+\n';
+    markdown += '* Composer\n';
     markdown += '* Bento API keys\n';
     // Add breaking changes first
     const breakingChanges = [
@@ -168,7 +169,7 @@ module.exports = async ({github, context}) => {
     // Add installation instructions
     markdown += '### Installation\n\n';
     markdown += '```bash\n';
-    markdown += 'bun add @bentonow/bento-node-sdk\n';
+    markdown += 'composer require bentonow/bento-php-sdk\n';
     markdown += '```\n\n';
     // Add contributors section
     const contributors = new Set([
