@@ -3,7 +3,7 @@
     "description": "🍱 Bento PHP SDK and tracking library",
     "type": "library",
     "require-dev": {
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^10.0"
     },
     "license": "MIT",
     "authors": [
@@ -14,11 +14,23 @@
         {
             "name": "Jacob Foster",
             "email": "me@jacob-foster.com"
+        },
+        {
+            "name": "Jesse Hanley",
+            "email": "jesse@bentonow.com"
+        },
+        {
+            "name": "Zachary Oakes",
+            "email": "zachary.oakes@gmail.com"
         }
     ],
+    "homepage": "https://github.com/bentonow/bento-php-sdk",
+    "support": {
+        "email": "support@bentonow.com"
+    },
     "require": {
-        "php": ">=7.1",
-        "guzzlehttp/guzzle": "^7.0",
+        "php": "^7.1 || ^8.0",
+        "guzzlehttp/guzzle": "^7.8",
         "guzzlehttp/test-server": "^0.1.0"
     },
     "autoload": {
